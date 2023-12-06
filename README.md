@@ -7,7 +7,7 @@
 ```bash
 flutter pub add provider  
 ```
-3. Lancer le Clicker Game
+
 
 ## Clicker Game
 
