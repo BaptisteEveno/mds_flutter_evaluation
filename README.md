@@ -1,4 +1,4 @@
-# Projet Flutter - Clicker Game et Projet Non Spécifié
+# Projet Flutter - Clicker Game et Projet Démo
 
 ## Installation
 
