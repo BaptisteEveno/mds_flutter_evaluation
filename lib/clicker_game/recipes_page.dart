@@ -65,8 +65,8 @@ class _RecipesPageState extends State<RecipesPage> {
   }
 
   final List<InventoryItem> _inventoryItems = [
-    InventoryItem(name: 'Recette 1', iconData: Icons.build),
-    InventoryItem(name: 'Recette 2', iconData: Icons.build),
+    InventoryItem(name: 'Recette 1'),
+    InventoryItem(name: 'Recette 2'),
     // Ajoutez d'autres éléments de votre inventaire ici
   ];
 
@@ -85,21 +85,32 @@ class _RecipesPageState extends State<RecipesPage> {
                 Expanded(child: Text(recipe['cost'].toString())),
                 Expanded(child: Text(recipe['description'].toString())),
                 IconButton(
-                  icon: Icon(Icons.build),
+                  icon: const Icon(Icons.build),
                   onPressed: () {
-                    // Créez un nouvel objet InventoryItem correspondant à cette recette
+                    // Create an InventoryItem corresponding to this recipe
                     InventoryItem item = InventoryItem(
                       name: recipe['name'].toString(),
-                      iconData: recipe['iconData'], // Supposons que vous avez un champ 'iconData' dans vos données de recette
                     );
 
-                    // Récupérez le fournisseur InventoryItemProvider
+                    // Retrieve the InventoryItemProvider
                     var inventoryItemProvider = Provider.of<InventoryItemProvider>(context, listen: false);
 
-                    // Mettez à jour l'objet InventoryItem dans le fournisseur
+                    // Update the InventoryItem object in the provider
                     inventoryItemProvider.setInventoryItem(item);
+
+
+                    // Call the function to add the recipe to the inventory
+                    inventoryItemProvider.addRecipeToInventory(item);
+
+                    // Afficher un SnackBar
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text('Recette fabriquée : ${recipe['name']}'),
+                      ),
+                    );
                   },
                 ),
+
               ],
             ),
           ),

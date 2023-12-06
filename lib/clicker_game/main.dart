@@ -9,11 +9,22 @@ void main() {
       providers: [
         ChangeNotifierProvider(create: (context) => ResourcesProvider()),
         ChangeNotifierProvider(create: (context) => InventoryItemProvider()),
+        ChangeNotifierProvider(create: (context) => InventoryItemProvider()), // Ajoutez cette ligne
+        Provider<Function>(
+          create: (context) {
+            return (String recipeName) {
+              var inventoryItemProvider = Provider.of<InventoryItemProvider>(context, listen: false);
+              inventoryItemProvider.addRecipeToInventory(InventoryItem(name: recipeName));
+            };
+          },
+        ),
       ],
       child: const MyApp(),
     ),
   );
 }
+
+
 
 
 
